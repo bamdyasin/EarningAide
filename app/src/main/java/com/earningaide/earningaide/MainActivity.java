@@ -2,8 +2,10 @@ package com.earningaide.earningaide;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -20,28 +22,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView textView = findViewById(R.id.tv);
+        Button button = findViewById(R.id.button);
 
-
-        //String Request // Link er shob kiso string hisabe niye ase .......................
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, "file:///D:/Hello.html", new Response.Listener<String>() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(String response) {
-                textView.setText("Server Result....\n"+ response);
-
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WebParsing.class);
+                startActivity(intent);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("Server Not Responded");
-            }
-        }
-        );
-        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-        requestQueue.add(stringRequest); // Edn string request.................
-
-
-
+        });
 
 
 
